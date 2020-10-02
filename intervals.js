@@ -41,18 +41,20 @@ setInterval(simpleInterval, 2000);
 
 // disabling the interval
     function destroy() {
-        document.querySelector('.infobelt').innerHTML = `<p>Destroyed</p>`
-    }
+            document.querySelector('.infobelt').innerHTML = `<p>Destroyed</p>`
+            window.removeEventListener('click', bombDisarm);
+        }
 
     const bombTimer = setTimeout(destroy, 3000);
 
-    window.addEventListener('click', function () {
-        document.querySelector('.infobelt').lastElementChild.innerHTML = `<p>You saved the website!</p>`
-        console.log('You clicked and saved the website!')
+    function bombDisarm() {
         // How to stop it? Make a reference to a setTimeout by closing it in a variable, so you can reach it;
         clearTimeout(bombTimer); // This stops the timer;
-    })
+        document.querySelector('.infobelt').lastElementChild.innerHTML = `<p>You saved the website!</p>`
+        console.log('You clicked and saved the website!')
+    }
 
+    window.addEventListener('click', bombDisarm);
 
 // Clearing the interval
     const poopInterval = setInterval(() => {
